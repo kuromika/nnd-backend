@@ -3,9 +3,12 @@ const User = require("../models/user");
 const { generatePassword } = require("../utils/password");
 
 const getUsers = async (req, res, next) => {
-  const posts = await User.find({}).exec();
-  res.json(posts);
-  next();
+  try {
+    const users = await User.find({}).exec();
+    return res.json(users);
+  } catch (err) {
+    return next(err);
+  }
 };
 
 const createUser = [
