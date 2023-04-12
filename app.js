@@ -29,6 +29,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userRouter);
 
+// error handler
+app.use((err, req, res, next) => {
+  const errors = err.payload ? err.payload : [err.message];
+  res.status(err.status || 500);
+  res.json({ errors });
+});
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
