@@ -8,6 +8,8 @@ const mongoose = require("mongoose");
 
 dotenv.config();
 
+const userRouter = require("./src/routes/userRouter");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -24,6 +26,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/users", userRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
