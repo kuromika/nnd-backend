@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 dotenv.config();
 
 const userRouter = require("./src/routes/userRouter");
+const postRouter = require("./src/routes/postRouter");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userRouter);
+app.use("/posts", postRouter);
 
 // error handler
 app.use((err, req, res, next) => {
