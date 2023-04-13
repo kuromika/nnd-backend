@@ -7,6 +7,7 @@ const isAdmin = [
   (req, res, next) => {
     if (!req.user.isAdmin) {
       const error = new Error("Only admins can use this resource");
+      error.status = 401;
       return next(error);
     }
     return next();
