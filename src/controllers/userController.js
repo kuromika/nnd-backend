@@ -1,6 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const User = require("../models/user");
 const { generatePassword } = require("../utils/password");
+const { isAdmin } = require("../middleware/authentication");
 
 const getUsers = async (req, res, next) => {
   try {
@@ -49,13 +50,16 @@ const createUser = [
   },
 ];
 
-const deleteUser = async (req, res, next) => {
-  try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    return res.json(deletedUser);
-  } catch (err) {
-    return next(err);
-  }
-};
+const deleteUser = [
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const deletedUser = await User.findByIdAndDelete(req.params.id);
+      return res.json(deletedUser);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
 
 module.exports = { getUsers, createUser, deleteUser };
