@@ -42,6 +42,7 @@ const getPost = [
 
 const updatePost = [
   isAdmin,
+  findDocument(Post),
   async (req, res, next) => {
     const update = {
       content: req.body.content,
@@ -60,6 +61,7 @@ const updatePost = [
 
 const deletePost = [
   isAdmin,
+  findDocument(Post),
   async (req, res, next) => {
     try {
       const deletedPost = await Post.findByIdAndDelete(req.params.id);
