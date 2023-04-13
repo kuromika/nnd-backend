@@ -9,9 +9,11 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 
 const jwtStrategy = require("./src/authentication/strategies/jwt");
+const localStrategy = require("./src/authentication/strategies/local");
 
 const userRouter = require("./src/routes/userRouter");
 const postRouter = require("./src/routes/postRouter");
+const authRouter = require("./src/routes/authRouter");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,7 +33,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 passport.use(jwtStrategy);
+passport.use(localStrategy);
 
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 
