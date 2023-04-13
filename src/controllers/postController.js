@@ -36,4 +36,22 @@ const getPost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, createPost, getPost };
+const updatePost = [
+  isAdmin,
+  async (req, res, next) => {
+    const update = {
+      content: req.body.content,
+      isPublished: req.body.isPublished,
+    };
+    try {
+      const updateDoc = await Post.findByIdAndUpdate(req.params.id, update, {
+        new: true,
+      });
+      return res.json(updateDoc);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+
+module.exports = { getPosts, createPost, getPost, updatePost };
