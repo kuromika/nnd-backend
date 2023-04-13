@@ -44,14 +44,26 @@ const updatePost = [
       isPublished: req.body.isPublished,
     };
     try {
-      const updateDoc = await Post.findByIdAndUpdate(req.params.id, update, {
+      const updatedDoc = await Post.findByIdAndUpdate(req.params.id, update, {
         new: true,
       });
-      return res.json(updateDoc);
+      return res.json(updatedDoc);
     } catch (err) {
       return next(err);
     }
   },
 ];
 
-module.exports = { getPosts, createPost, getPost, updatePost };
+const deletePost = [
+  isAdmin,
+  async (req, res, next) => {
+    try {
+      const deletedPost = await Post.findByIdAndDelete(req.params.id);
+      return res.json(deletedPost);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+
+module.exports = { getPosts, createPost, getPost, updatePost, deletePost };
