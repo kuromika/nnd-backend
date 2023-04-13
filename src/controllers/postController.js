@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const { isAdmin } = require("../middleware/authentication");
+const findDocument = require("../middleware/mongoose");
 
 const getPosts = async (req, res, next) => {
   try {
@@ -27,14 +28,17 @@ const createPost = [
   },
 ];
 
-const getPost = async (req, res, next) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    return res.json(post);
-  } catch (err) {
-    return next(err);
-  }
-};
+const getPost = [
+  findDocument(Post),
+  async (req, res, next) => {
+    try {
+      const post = await Post.findById(req.params.id);
+      return res.json(post);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
 
 const updatePost = [
   isAdmin,
