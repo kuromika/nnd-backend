@@ -14,6 +14,7 @@ const userRouter = require("./src/routes/userRouter");
 const commentRouter = require("./src/routes/commentRouter");
 const postRouter = require("./src/routes/postRouter");
 const authRouter = require("./src/routes/authRouter");
+const likeRouter = require("./src/routes/likeRouter");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,6 +40,7 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
+app.use("/likes", likeRouter);
 
 // error handler
 app.use((err, req, res, next) => {
