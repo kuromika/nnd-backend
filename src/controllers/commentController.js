@@ -26,4 +26,23 @@ const createPostComment = [
     }
   },
 ];
-module.exports = { getPostComments, createPostComment };
+
+const updatePostComment = [
+  isAuth,
+  async (req, res, next) => {
+    try {
+      const update = {
+        content: req.body.content,
+      };
+      const updatedComment = await Comment.findByIdAndUpdate(
+        req.params.id,
+        update,
+        { new: true }
+      );
+      return res.json(updatedComment);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+module.exports = { getPostComments, createPostComment, updatePostComment };

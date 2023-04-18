@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const logger = require("morgan");
 const path = require("path");
@@ -12,6 +11,7 @@ const jwtStrategy = require("./src/authentication/strategies/jwt");
 const localStrategy = require("./src/authentication/strategies/local");
 
 const userRouter = require("./src/routes/userRouter");
+const commentRouter = require("./src/routes/commentRouter");
 const postRouter = require("./src/routes/postRouter");
 const authRouter = require("./src/routes/authRouter");
 
@@ -38,6 +38,7 @@ passport.use(localStrategy);
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
 
 // error handler
 app.use((err, req, res, next) => {
