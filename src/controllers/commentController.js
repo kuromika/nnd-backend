@@ -2,6 +2,15 @@ const { isAuth } = require("../middleware/authentication");
 const findDocument = require("../middleware/mongoose");
 const Comment = require("../models/comment");
 
+const getComments = async (req, res, next) => {
+  try {
+    const comments = await Comment.find({});
+    return res.json(comments);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 const getPostComments = async (req, res, next) => {
   try {
     const comments = await Comment.find({ post: req.params.postId });
@@ -73,9 +82,23 @@ const deletePostComment = [
   },
 ];
 
+const getComment = [
+  findDocument(Comment),
+  async (req, res, next) => {
+    try {
+      const comment = await Comment.findById(req.params.id);
+      return res.json(comment);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+
 module.exports = {
   getPostComments,
   createPostComment,
   updatePostComment,
   deletePostComment,
+  getComments,
+  getComment,
 };
