@@ -1,5 +1,6 @@
 const { isAuth } = require("../middleware/authentication");
 const findDocument = require("../middleware/mongoose");
+const checkOwnership = require("../middleware/permissions");
 const Comment = require("../models/comment");
 
 const getComments = async (req, res, next) => {
@@ -40,14 +41,9 @@ const createPostComment = [
 const updatePostComment = [
   isAuth,
   findDocument(Comment),
+  checkOwnership(Comment),
   async (req, res, next) => {
     try {
-      const comment = await Comment.findById(req.params.id);
-      if (comment.user.toString() !== req.user.id) {
-        const error = new Error("Only the creator can update their comments");
-        error.status = 403;
-        return next(error);
-      }
       const update = {
         content: req.body.content,
       };
@@ -66,14 +62,9 @@ const updatePostComment = [
 const deletePostComment = [
   isAuth,
   findDocument(Comment),
+  checkOwnership(Comment),
   async (req, res, next) => {
     try {
-      const comment = await Comment.findById(req.params.id);
-      if (comment.user.toString() !== req.user.id) {
-        const error = new Error("Only the creator can delete their comments");
-        error.status = 403;
-        return next(error);
-      }
       const deletedComment = await Comment.findByIdAndDelete(req.params.id);
       return res.json(deletedComment);
     } catch (err) {
