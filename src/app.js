@@ -7,14 +7,14 @@ const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
 
-const jwtStrategy = require("./src/authentication/strategies/jwt");
-const localStrategy = require("./src/authentication/strategies/local");
+const jwtStrategy = require("./authentication/strategies/jwt");
+const localStrategy = require("./authentication/strategies/local");
 
-const userRouter = require("./src/routes/userRouter");
-const commentRouter = require("./src/routes/commentRouter");
-const postRouter = require("./src/routes/postRouter");
-const authRouter = require("./src/routes/authRouter");
-const likeRouter = require("./src/routes/likeRouter");
+const userRouter = require("./routes/userRouter");
+const commentRouter = require("./routes/commentRouter");
+const postRouter = require("./routes/postRouter");
+const authRouter = require("./routes/authRouter");
+const likeRouter = require("./routes/likeRouter");
 
 const app = express();
 const port = process.env.PORT || 3000;
