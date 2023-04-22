@@ -14,7 +14,7 @@ router.post(
         if (err) {
           return next(err);
         }
-        return res.json({ token });
+        return res.json({ token, user: req.user });
       }
     );
   }
