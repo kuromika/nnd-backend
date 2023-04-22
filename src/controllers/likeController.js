@@ -1,5 +1,7 @@
 const Like = require("../models/like");
 const { isAuth } = require("../middleware/authentication");
+const checkOwnership = require("../middleware/permissions");
+const findDocument = require("../middleware/mongoose");
 
 const getLikes = async (req, res, next) => {
   try {
@@ -43,4 +45,18 @@ const createLike = (model) => [
   },
 ];
 
-module.exports = { getLikes, getDocLikes, createLike };
+const deleteLike = [
+  isAuth,
+  findDocument(Like),
+  checkOwnership(Like),
+  async (req, res, next) => {
+    try {
+      const deleted = await Like.findByIdAndDelete(req.params.id);
+      return res.json(deleted);
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
+
+module.exports = { getLikes, getDocLikes, createLike, deleteLike };
