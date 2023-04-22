@@ -13,5 +13,6 @@ router.get("/:postId/comments", commentController.getPostComments);
 router.post("/:postId/comments", commentController.createPostComment);
 
 router.get("/:postId/likes", likeController.getPostLikes);
+router.post("/:id/likes", likeController.createLike("Post"));
 
 module.exports = router;
