@@ -10,9 +10,9 @@ const getLikes = async (req, res, next) => {
   }
 };
 
-const getPostLikes = async (req, res, next) => {
+const getDocLikes = (model) => async (req, res, next) => {
   try {
-    const likes = await Like.find({ docModel: "Post", doc: req.params.postId });
+    const likes = await Like.find({ docModel: model, doc: req.params.id });
     return res.json(likes);
   } catch (err) {
     return next(err);
@@ -43,4 +43,4 @@ const createLike = (model) => [
   },
 ];
 
-module.exports = { getLikes, getPostLikes, createLike };
+module.exports = { getLikes, getDocLikes, createLike };
