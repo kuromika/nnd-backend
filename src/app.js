@@ -5,6 +5,7 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const jwtStrategy = require("./authentication/strategies/jwt");
 const localStrategy = require("./authentication/strategies/local");
@@ -27,6 +28,7 @@ main().catch((err) => console.log(err));
 
 app.use(logger("dev"));
 app.use(helmet());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
