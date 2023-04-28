@@ -4,7 +4,15 @@ const findDocument = require("../middleware/mongoose");
 
 const getPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find({}).sort({ date: -1 }).exec();
+    const { published } = req.query;
+    let posts;
+    if (!published) {
+      posts = await Post.find({}).sort({ date: -1 }).exec();
+    } else if (published === "true") {
+      posts = await Post.find({ isPublished: true }).sort({ date: -1 }).exec();
+    } else {
+      posts = await Post.find({ isPublished: false }).sort({ date: -1 }).exec();
+    }
     return res.json(posts);
   } catch (err) {
     return next(err);
