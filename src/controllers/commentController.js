@@ -14,7 +14,11 @@ const getComments = async (req, res, next) => {
 
 const getPostComments = async (req, res, next) => {
   try {
-    const comments = await Comment.find({ post: req.params.postId });
+    const comments = await Comment.find({ post: req.params.postId })
+      .sort({
+        date: -1,
+      })
+      .populate("user");
     return res.json(comments);
   } catch (err) {
     return next(err);
