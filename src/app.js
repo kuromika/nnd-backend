@@ -33,6 +33,10 @@ app.use(
     origin: [
       "https://natsu-no-daisankaku-a.vercel.app/",
       "https://natsu-no-daisankaku.vercel.app/",
+      "https://natsu-no-daisankaku.vercel.app/auth/signup",
+      "https://natsu-no-daisankaku.vercel.app/auth/login",
+      "https://natsu-no-daisankaku.vercel.app/posts",
+      "https://natsu-no-daisankaku.vercel.app/posts/*",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     optionsSuccessStatus: 200,
