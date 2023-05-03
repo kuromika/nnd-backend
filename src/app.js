@@ -33,7 +33,6 @@ app.use(
     origin: [
       "https://natsu-no-daisankaku-a.vercel.app",
       "https://natsu-no-daisankaku.vercel.app",
-      "http://localhost:5000",
     ],
     optionsSuccessStatus: 200,
   })
