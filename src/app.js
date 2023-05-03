@@ -31,15 +31,9 @@ app.use(helmet());
 app.use(
   cors({
     origin: [
-      "https://natsu-no-daisankaku-a.vercel.app/",
-      "https://natsu-no-daisankaku.vercel.app/",
-      "https://natsu-no-daisankaku.vercel.app/auth/signup",
-      "https://natsu-no-daisankaku.vercel.app/auth/login",
-      "https://natsu-no-daisankaku.vercel.app/posts",
-      "https://natsu-no-daisankaku.vercel.app/posts/*",
+      "https://natsu-no-daisankaku-a.vercel.app",
+      "https://natsu-no-daisankaku.vercel.app",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
     optionsSuccessStatus: 200,
   })
 );
