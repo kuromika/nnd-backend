@@ -34,6 +34,7 @@ app.use(
       "https://natsu-no-daisankaku-a.vercel.app/",
       "https://natsu-no-daisankaku.vercel.app/",
     ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     optionsSuccessStatus: 200,
   })
 );
