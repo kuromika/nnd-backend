@@ -31,8 +31,8 @@ app.use(helmet());
 app.use(
   cors({
     origin: [
-      "https://natsu-no-daisankaku-a.vercel.app/",
-      "https://natsu-no-daisankaku.vercel.app/",
+      "https://natsu-no-daisankaku-a.vercel.app/*",
+      "https://natsu-no-daisankaku.vercel.app/*",
     ],
   })
 );
