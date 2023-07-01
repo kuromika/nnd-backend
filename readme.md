@@ -12,7 +12,6 @@ Authentication made with Passport using the local and JWT strategies.
 
 | Method | Endpoint                                 | Request                                    | Response                           |
 | ------ | ---------------------------------------- | ------------------------------------------ | ---------------------------------- |
-| GET    | https://nnd-backend.up.railway.app/users |                                            | JSON of all the registered users   |
 | POST   | https://nnd-backend.up.railway.app/users | **Body:** 'username' and 'password' fields | JSON with the data of the new user |
 
 #### Auth:
